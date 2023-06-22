@@ -1,0 +1,81 @@
+//Virtual function
+//A virtual function is used to override/replace the base class function implementation
+//If a object (derived) is created using base class pointer then it will call base class functio not derived class 
+//function though it has the implementation
+
+#include<iostream>
+using namespace std;
+
+class Emp{
+    private:
+        int a;
+    public:
+        void Print(){
+            cout<<"Base class Print() fun";
+        }
+    
+};
+
+class SDE: public Emp{
+    public:
+        void Print(){
+            cout<<"Derived SDE class Print() fun";
+        }
+};
+
+class HR : public Emp{
+    public:
+         void Print(){
+             cout<<"Derived HR class Print() fun";
+         }
+};
+
+int main()
+{
+    Emp *ptr = new SDE(); // derived class object is created using base class pointer
+    ptr->Print(); // op : Base class Print() fun
+    
+    HR *hr  = new HR();
+    hr->Print(); // Derived HR class Print() fun
+}
+--------------------------------------------------------
+//bUT suppose we dont want base class function and and need derived class implementation only, then we will need 
+//to make that function virtual in base class using virtual keyword
+//pure virtual function = > if we initialise a virtual function with zero then it is called pure virtual function. A class that 
+//has atleast one pure virtual function is called abstract class.
+//pure virtual function has no body is base class and we MUST provide implementation in the derived class.
+
+//Now lets make the above function as vitual
+class Emp{
+    private:
+        int a;
+    public:
+        virtual void Print(){
+            cout<<"Base class Print() fun";
+        }
+    
+};
+
+class SDE: public Emp{
+    public:
+        void Print(){
+            cout<<"Derived SDE class Print() fun";
+        }
+};
+
+class HR : public Emp{
+    public:
+         void Print(){
+             cout<<"Derived HR class Print() fun";
+         }
+};
+
+
+int main()
+{
+    Emp *ptr = new SDE(); // derived class object is created using base class pointer
+    ptr->Print(); // op : Derived SDE class Print() fun
+    
+    HR *hr  = new HR();
+    hr->Print(); // Derived HR class Print() fun //does not maater virtual or not it will always implement derived class function since it is being created uing own pointer not base class pinter 
+}
