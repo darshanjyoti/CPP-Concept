@@ -1,0 +1,52 @@
+//Reference : it is kind of virtual varible who refers something
+//ref needs to initialise always.
+
+#include<iostream>
+using namespace std;
+
+
+void increment(int value){
+    ++value;
+}
+
+void refIncrement(int& value){
+    ++value;
+}
+
+void ptrIncrement(int* value){
+    //we are getting a adress not value
+    
+    (*value)++;
+}
+
+int main()
+{
+    int a = 10;
+    
+    int& ref = a; //ref is a reference to always
+    
+    ref = 30;
+    
+    cout<<ref<<endl; //30 ref changed the value of a since it refers to a.
+    //-------------------------------------------------------------------------
+    //call by value and refernece and reference vs pointer
+    
+    //call by value
+    int value = 5;
+    increment(value);
+    cout<<value<<endl; //value is still 5 
+    
+    //call by reference
+    refIncrement(value);
+    cout<<value<<endl; //value is 6 now
+    
+    //we can do this using ponter as well. we will send the adress of value 
+    //and by dereferencing the address we can modify the value
+    ptrIncrement(&value);
+    
+    cout<<value<<endl; //7 since refIncrement(value) incerement once
+    
+
+}
+
+

@@ -1,0 +1,68 @@
+//There's actually three meanings of the static keyword in C++ 
+//1.   Local Static: static var inside of a function: value sticks around throughout
+//program lifetime so same value sticks around if you rerun the function (only gets initialized once) 
+//2.   Static globally scoped var / func: Makes it visible only in this file, normally globals
+//would be visible everywhere in program when linked
+//3.   Static Class Vars or Functions: belongs to root class, not instances of it, same values
+//shared across all instances (so cant access instance variables/'this' from static methods)
+
+#include<iostream>
+using namespace std;
+
+void count(){
+     int n = 0;
+     cout<<"Before "<<n<<endl;
+     n++;
+     cout<<"after "<<n<<endl;
+    
+}
+
+void count1(){
+     static int n = 0;
+     cout<<"Before1 "<<n<<endl;
+     n++;
+     cout<<"after1 "<<n<<endl;
+    
+}
+
+int main()
+{
+    //local static
+    count();   
+    count();
+    count();   
+// Before 0
+//after 1
+//Before 0
+//after 1
+//Before 0
+//after 1
+
+//every time when we call the function, n gets initialsed to 0 so getting same result
+//if we use static keyword then n will initialised once and value will be retained
+
+  count1();
+  count1();
+  count1();
+ 
+//Before1 0
+//after1 1
+//Before1 1
+//after1 2
+//Before1 2
+//after1 3
+
+//----------------------------------------------
+//Static globally scoped var / func
+//suppose we have two file file1.cpp and file2.cpp and both has global varible int a =10 and files are linked
+//this will give us error since global varible is visible everywhere
+//so we can declaare as static int a =10; then it will be visible to that file only though it is global
+
+//----------------------------------------------
+//extern keyword
+//xtern keyword is used to accessing a variable defined in another file
+    
+
+}
+
+
