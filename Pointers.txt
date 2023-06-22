@@ -1,0 +1,51 @@
+//pointer is a variable(its simply a int or number) which holds the address of another varible
+
+#include<iostream>
+using namespace std;
+
+
+int main()
+{
+    int a = 8; //this is a variable created in stack memory
+    //creating a pointer
+    int* ptr = &a; //ptr now holds the memory address of a;
+    
+    cout<<ptr<<endl; //0x7ffd3a24540c =>this is the memory adress where 8 is stored
+    
+    //we can even create a void pointer to store the adress
+    
+    void* ptr2 = &a;
+    cout<<ptr2<<endl; //0x7ffd3a24540c exact same address right?
+    //basically we can store the adress in any type of ponters
+    
+    //but we got the adress through ponter and you want to manipulates the value hold by that adress
+    //then we explicitly mention the ponnter types
+    
+    //why we need ponter?=>after getting the memory adress of a varible we can directly chnage the value of that varible through ponter
+    
+    *ptr = 10; //* is used to get the value hold by that adress
+    cout<<a<<endl;// now a is 10
+    
+    //ponter allows us to allocate memory dynamically at run time using new , malloc , calloc etc.
+    //we need to deallocate the memory to prevent memory overflow
+    int* dynamicInt = new int; // Dynamically allocate an integer
+    //The pointer dynamicInt holds the address of the dynamically allocated memory block.
+    *dynamicInt = 42; // Assign a value to the dynamically allocated integer
+     // Print the value
+    std::cout << "Dynamic integer value: " << *dynamicInt << std::endl;
+
+    // Deallocate the dynamically allocated integer
+    delete dynamicInt;
+    
+    //double pointer =>it holds the address of a ponter
+    
+    int** doublePtr = &ptr;
+    
+    cout<<doublePtr<<endl; //0x7ffc859d93b8
+    
+    **doublePtr = 30;
+    cout<<a<<endl; //30
+
+}
+
+
