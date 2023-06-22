@@ -86,3 +86,56 @@ int main()
 //we want SDE salary to increase by 10 % so we cant use Emp's RaiseSalary() method but we want other base class method as it is
 //so we can make the RaiseSalary() method of base class as Virtual and create an SDE object using base class Emp pointers.
 //now SDE object will call RaiseSalary() method of its own not base class implementation and other method will be called from base class only since not virtual
+Q. suppose we have a class emp which has method raiseslary() which raise the slary by 5%. We have object sde , hr and it derived from emp. I want salary of sde sholud increase by 10% and rest will use smae formula as base class i.e. 5%. how will you implement this?
+ans.
+#include <iostream>
+
+class Emp {
+protected:
+    double salary;
+
+public:
+    Emp(double initialSalary) : salary(initialSalary) {}
+
+    virtual void raiseSalary() {
+        salary *= 1.05; // 5% salary raise
+    }
+
+    void printSalary() const {
+        std::cout << "Salary: $" << salary << std::endl;
+    }
+};
+
+class SDE : public Emp {
+public:
+    SDE(double initialSalary) : Emp(initialSalary) {}
+
+    void raiseSalary() override {
+        salary *= 1.10; // 10% salary raise for SDE
+    }
+};
+
+class HR : public Emp {
+public:
+    HR(double initialSalary) : Emp(initialSalary) {}
+    // HR class uses the base class implementation for raiseSalary()
+};
+
+int main() {
+    Emp* emp1 = new SDE(5000.0);
+    Emp* emp2 = new HR(4000.0);
+
+    emp1->raiseSalary(); // 10% raise for SDE
+    emp2->raiseSalary(); // 5% raise for HR (base class implementation)
+
+    emp1->printSalary(); // Output: Salary: $5500
+    emp2->printSalary(); // Output: Salary: $4200
+
+    delete emp1;
+    delete emp2;
+
+    return 0;
+}
+**In this example, the Emp base class has a virtual function raiseSalary() that raises the salary by 5%. The SDE class, derived from Emp, overrides the raiseSalary() function and raises the salary by 10%. On the other hand, the HR class also derives from Emp but uses the base class implementation for raiseSalary().
+
+In the main() function, we create an SDE object and an HR object using pointers of type Emp*. By calling the raiseSalary() function on each object, the appropriate version of the function is invoked based on the actual type of the object. Finally, we print the salaries of both employees to verify the raise calculations.
