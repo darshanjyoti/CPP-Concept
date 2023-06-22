@@ -79,3 +79,10 @@ int main()
     HR *hr  = new HR();
     hr->Print(); // Derived HR class Print() fun //does not maater virtual or not it will always implement derived class function since it is being created uing own pointer not base class pinter 
 }
+
+//Prcatical example of why we need virtual function
+//Soppose we have a class Emp which has function RaisedSalary() which raised the salary by 5 %.
+//We have other class SDE, HR , IT inherited from Emp.
+//we want SDE salary to increase by 10 % so we cant use Emp's RaiseSalary() method but we want other base class method as it is
+//so we can make the RaiseSalary() method of base class as Virtual and create an SDE object using base class Emp pointers.
+//now SDE object will call RaiseSalary() method of its own not base class implementation and other method will be called from base class only since not virtual
