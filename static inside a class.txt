@@ -1,0 +1,61 @@
+//Static inside a class or struct
+
+
+#include<iostream>
+using namespace std;
+ 
+class entity{
+    public:
+     int x;
+     int y;
+     
+     void print(){
+         cout<<x<<" "<<y<<endl;
+     }
+};
+
+class entityStatic{
+    public:
+     static int x;
+     static int y;
+     
+     void print(){
+         cout<<x<<" "<<y<<endl;
+     }
+};
+
+int entityStatic::x;
+int entityStatic::y;
+
+int main()
+{
+   
+   entity e ;
+   e.x = 2;
+   e.y = 3;
+   
+   e.print(); // x =2 and y =3 
+   
+   entity e1;
+   e1.x =10;
+   e1.y=20;
+   e1.print();  //x = 10 and y =20;
+   
+   //Static variables that are inside a class are shared between class instances , like global variables for the class
+   //Static methods have a similar effect 
+    //Static methods can’t access non-static variables 
+   entityStatic e2 ;
+   e2.x = 2;
+   e2.y = 3;
+   
+   entityStatic e3;
+   e3.x =10;
+   e3.y=20;
+   
+   e2.print(); // x =10 and y =20 
+   e3.print();  //x = 10 and y =20;  //mean all instaces referes to same x and y like global variables
+   //so e3 modifies x and y and e2 has the same effects
+
+}
+
+
