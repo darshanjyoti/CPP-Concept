@@ -1,0 +1,40 @@
+
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+   
+ //writing to a file using output stream class
+  ofstream ofs;
+  ofs.open("text.txt");
+  
+  ofs<<"hello, this is darshan";
+  
+  ofs.close();
+  
+  //reading from the file using input stream class
+  
+  ifstream ifs;
+  
+  ifs.open("text.txt");
+  
+  string line;
+  
+  while(getline(ifs, line)){
+      cout<<line;
+  }
+  
+  //we can use char as well
+  /*char ch;
+  while(ifs.get(ch)){
+      cout<<ch;
+  }*/
+  
+  ifs.close();
+  
+ 
+   
+   return 0;
+}
